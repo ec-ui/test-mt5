@@ -22,5 +22,6 @@ After generation, open the HTML file in a browser:
 - Zoom in/out with mouse wheel and toolbar.
 - Pan using the pan tool.
 - Toggle ASK/BID visibility by clicking legend items.
+- Console shows parse progress (percent + processed rows) while reading the input file.
 
 Note: generated HTML uses Plotly from CDN, so internet access is needed when opening the chart unless you point `--plotly-cdn` to a local Plotly file.

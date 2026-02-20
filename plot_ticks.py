@@ -6,6 +6,8 @@ import csv
 from datetime import datetime
 import json
 from pathlib import Path
+import sys
+import time
 from typing import List, Sequence, Tuple
 
 
@@ -55,17 +57,30 @@ def parse_ticks(
     path: Path,
 ) -> Tuple[List[datetime], List[float], List[datetime], List[float], int]:
     delimiter = detect_delimiter(path)
+    total_bytes = max(path.stat().st_size, 1)
 
     bid_ts: List[datetime] = []
     bid_vals: List[float] = []
     ask_ts: List[datetime] = []
     ask_vals: List[float] = []
     rows = 0
+    last_percent = -1
+    last_update = 0.0
 
     with path.open("r", encoding="utf-8", newline="") as f:
         reader = csv.DictReader(f, delimiter=delimiter)
         for row in reader:
             rows += 1
+            if rows % 5000 == 0:
+                progress = min(f.buffer.tell() / total_bytes, 1.0)
+                percent = int(progress * 100)
+                now = time.monotonic()
+                if percent != last_percent and (now - last_update >= 0.25):
+                    print(f"\rParsing ticks: {percent:3d}% ({rows:,} rows)", end="")
+                    sys.stdout.flush()
+                    last_percent = percent
+                    last_update = now
+
             date_value = (row.get("<DATE>") or "").strip()
             time_value = (row.get("<TIME>") or "").strip()
             if not date_value or not time_value:
@@ -82,6 +97,8 @@ def parse_ticks(
             if ask_raw:
                 ask_ts.append(ts)
                 ask_vals.append(float(ask_raw))
+
+    print(f"\rParsing ticks: 100% ({rows:,} rows)")
 
     return bid_ts, bid_vals, ask_ts, ask_vals, rows
 

@@ -1,7 +1,8 @@
 ---
 id: "202602201119-PQN3GE"
 title: "Add console progress display for tick parsing"
-status: "DOING"
+result_summary: "Console parsing progress added for long-running tick file processing."
+status: "DONE"
 priority: "med"
 owner: "CODER"
 depends_on: []
@@ -18,11 +19,16 @@ verification:
   updated_at: "2026-02-20T11:22:37.244Z"
   updated_by: "CODER"
   note: "Verified parser progress output is visible during processing of provided EURUSD file and HTML chart generation still succeeds."
-commit: null
+commit:
+  hash: "6d9db888a0625716409260506e3cd95f7b584fb8"
+  message: "✨ PQN3GE code: add console parsing progress output"
 comments:
   -
     author: "CODER"
     body: "Start: Add throttled parsing progress output to plot_ticks.py and update docs while preserving existing behavior."
+  -
+    author: "CODER"
+    body: "Verified: parser now prints incremental progress percentage and row counts during read; chart generation behavior preserved."
 events:
   -
     type: "status"
@@ -37,8 +43,15 @@ events:
     author: "CODER"
     state: "ok"
     note: "Verified parser progress output is visible during processing of provided EURUSD file and HTML chart generation still succeeds."
+  -
+    type: "status"
+    at: "2026-02-20T11:23:22.650Z"
+    author: "CODER"
+    from: "DOING"
+    to: "DONE"
+    note: "Verified: parser now prints incremental progress percentage and row counts during read; chart generation behavior preserved."
 doc_version: 2
-doc_updated_at: "2026-02-20T11:22:37.254Z"
+doc_updated_at: "2026-02-20T11:23:22.650Z"
 doc_updated_by: "CODER"
 description: "Show visible parsing progress in console while reading large MT5 tick files so long runs are not perceived as hangs."
 id_source: "generated"

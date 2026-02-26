@@ -1,7 +1,8 @@
 ---
 id: "202602261000-XSP60E"
 title: "Build funding yield plotter for GAZPF CSV"
-status: "DOING"
+result_summary: "Added funding yield plotter for GAZPF CSV."
+status: "DONE"
 priority: "med"
 owner: "CODER"
 depends_on: []
@@ -14,15 +15,20 @@ plan_approval:
   updated_by: "ORCHESTRATOR"
   note: "Plan approved by user on 2026-02-26."
 verification:
-  state: "pending"
-  updated_at: null
-  updated_by: null
-  note: null
-commit: null
+  state: "ok"
+  updated_at: "2026-02-26T10:03:33.323Z"
+  updated_by: "CODER"
+  note: "Ran python plot_funding_yield.py which generated gazpf_funding_yield.html; chart loads and supports zoom/pan with weekend yields at zero."
+commit:
+  hash: "f109d1ee54981547cc574faf7bb7dd8bf2a82eeb"
+  message: "✨ XSP60E code: add funding yield plotter"
 comments:
   -
     author: "CODER"
     body: "Start: Implementing CSV parser, yield calc, and interactive Plotly chart per spec."
+  -
+    author: "CODER"
+    body: "Verified: Implemented plot_funding_yield.py, generated interactive Plotly HTML, and verified weekend yields are forced to zero per requirement."
 events:
   -
     type: "status"
@@ -31,8 +37,21 @@ events:
     from: "TODO"
     to: "DOING"
     note: "Start: Implementing CSV parser, yield calc, and interactive Plotly chart per spec."
+  -
+    type: "verify"
+    at: "2026-02-26T10:03:33.323Z"
+    author: "CODER"
+    state: "ok"
+    note: "Ran python plot_funding_yield.py which generated gazpf_funding_yield.html; chart loads and supports zoom/pan with weekend yields at zero."
+  -
+    type: "status"
+    at: "2026-02-26T10:03:48.513Z"
+    author: "CODER"
+    from: "DOING"
+    to: "DONE"
+    note: "Verified: Implemented plot_funding_yield.py, generated interactive Plotly HTML, and verified weekend yields are forced to zero per requirement."
 doc_version: 2
-doc_updated_at: "2026-02-26T10:02:22.811Z"
+doc_updated_at: "2026-02-26T10:03:48.513Z"
 doc_updated_by: "CODER"
 description: "Create a Python utility to read the GAZPF contract results CSV, compute annualized funding yield (SWAPRATE/CLOSE * 365 * 100) with weekends forced to zero, and generate an interactive plot."
 id_source: "generated"
@@ -64,6 +83,14 @@ CSV parsing may fail if format deviates (extra lines, different delimiter, decim
 ### Results
 
 <!-- BEGIN VERIFICATION RESULTS -->
+#### 2026-02-26T10:03:33.323Z — VERIFY — ok
+
+By: CODER
+
+Note: Ran python plot_funding_yield.py which generated gazpf_funding_yield.html; chart loads and supports zoom/pan with weekend yields at zero.
+
+VerifyStepsRef: doc_version=2, doc_updated_at=2026-02-26T10:02:22.811Z, excerpt_hash=sha256:6c3ef5d22e77728a7fee89e441e69088d4c0383eedbe018282db14f9b4bc6750
+
 <!-- END VERIFICATION RESULTS -->
 
 ## Rollback Plan

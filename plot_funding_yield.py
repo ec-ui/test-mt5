@@ -6,6 +6,7 @@ import csv
 from datetime import datetime
 import json
 from pathlib import Path
+import time
 from typing import List, Tuple
 
 
@@ -58,12 +59,29 @@ def read_yield_series(path: Path) -> Tuple[List[datetime], List[float]]:
     header, header_idx = find_header(path)
     dates: List[datetime] = []
     yields: List[float] = []
+    total_bytes = max(path.stat().st_size, 1)
+    rows = 0
+    last_percent = -1
+    last_update = 0.0
 
     with path.open("r", encoding="utf-8", newline="") as f:
         for _ in range(header_idx + 1):
             next(f, None)
         reader = csv.DictReader(f, fieldnames=header, delimiter=";")
         for row in reader:
+            rows += 1
+            if rows % 1000 == 0:
+                progress = min(f.buffer.tell() / total_bytes, 1.0)
+                percent = int(progress * 100)
+                now = time.monotonic()
+                if percent != last_percent and (now - last_update >= 0.25):
+                    print(
+                        f"\rParsing CSV: {percent:3d}% ({rows:,} rows)",
+                        end="",
+                        flush=True,
+                    )
+                    last_percent = percent
+                    last_update = now
             date_raw = (row.get("TRADEDATE") or "").strip()
             close_raw = (row.get("CLOSE") or "").strip()
             swap_raw = (row.get("SWAPRATE") or "").strip()
@@ -92,6 +110,9 @@ def read_yield_series(path: Path) -> Tuple[List[datetime], List[float]]:
 
             dates.append(trade_date)
             yields.append(annualized)
+
+    if rows:
+        print(f"\rParsing CSV: 100% ({rows:,} rows)")
 
     return dates, yields
 

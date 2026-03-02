@@ -1,7 +1,8 @@
 ---
 id: "202603021619-2S6YGJ"
 title: "Add output section and screenshots to README"
-status: "DOING"
+result_summary: "Added README output section and PNG screenshots."
+status: "DONE"
 priority: "med"
 owner: "DOCS"
 depends_on: []
@@ -14,15 +15,20 @@ plan_approval:
   updated_by: "ORCHESTRATOR"
   note: "Plan approved by user on 2026-03-02 (PNG screenshots)."
 verification:
-  state: "pending"
-  updated_at: null
-  updated_by: null
-  note: null
-commit: null
+  state: "ok"
+  updated_at: "2026-03-02T16:31:13.100Z"
+  updated_by: "DOCS"
+  note: "Confirmed README.md includes output section and embedded screenshots; images/ contains both PNG files."
+commit:
+  hash: "b8b107ea8163753d26a8a9325f4db6d0a1bd0426"
+  message: "✨ 2S6YGJ docs: add output screenshots"
 comments:
   -
     author: "DOCS"
     body: "Start: Adding output section and PNG screenshots to README."
+  -
+    author: "DOCS"
+    body: "Verified: Added output section to README and included PNG screenshots for both charts."
 events:
   -
     type: "status"
@@ -31,8 +37,21 @@ events:
     from: "TODO"
     to: "DOING"
     note: "Start: Adding output section and PNG screenshots to README."
+  -
+    type: "verify"
+    at: "2026-03-02T16:31:13.100Z"
+    author: "DOCS"
+    state: "ok"
+    note: "Confirmed README.md includes output section and embedded screenshots; images/ contains both PNG files."
+  -
+    type: "status"
+    at: "2026-03-02T16:31:46.961Z"
+    author: "DOCS"
+    from: "DOING"
+    to: "DONE"
+    note: "Verified: Added output section to README and included PNG screenshots for both charts."
 doc_version: 2
-doc_updated_at: "2026-03-02T16:30:23.474Z"
+doc_updated_at: "2026-03-02T16:31:46.961Z"
 doc_updated_by: "DOCS"
 description: "Add a README section describing output files and include PNG screenshots of the charts stored in the repository."
 id_source: "generated"
@@ -64,6 +83,14 @@ Generating PNGs requires installing plotting dependencies; ensure they are not c
 ### Results
 
 <!-- BEGIN VERIFICATION RESULTS -->
+#### 2026-03-02T16:31:13.100Z — VERIFY — ok
+
+By: DOCS
+
+Note: Confirmed README.md includes output section and embedded screenshots; images/ contains both PNG files.
+
+VerifyStepsRef: doc_version=2, doc_updated_at=2026-03-02T16:30:23.474Z, excerpt_hash=sha256:e806f3b6945effe7c14c3d577d3bb48aed2356a63884473f831caf1a0e96f54a
+
 <!-- END VERIFICATION RESULTS -->
 
 ## Rollback Plan

@@ -1,7 +1,8 @@
 ---
 id: "202603021601-GMTT5F"
 title: "Use trading days in funding yield formula"
-status: "DOING"
+result_summary: "Use 252 trading days in funding yield formula."
+status: "DONE"
 priority: "med"
 owner: "CODER"
 depends_on: []
@@ -14,15 +15,20 @@ plan_approval:
   updated_by: "ORCHESTRATOR"
   note: "Plan approved by user on 2026-03-02."
 verification:
-  state: "pending"
-  updated_at: null
-  updated_by: null
-  note: null
-commit: null
+  state: "ok"
+  updated_at: "2026-03-02T16:03:26.773Z"
+  updated_by: "CODER"
+  note: "Ran python plot_funding_yield.py; output generated and formula uses trading-days constant (252)."
+commit:
+  hash: "23473e7d1ac4e5c0894bdf534e0046e5104d9cc3"
+  message: "✨ GMTT5F code: use trading days factor"
 comments:
   -
     author: "CODER"
     body: "Start: Updating annualization factor to trading days per year."
+  -
+    author: "CODER"
+    body: "Verified: Updated annualization factor to trading days per year and confirmed output generation."
 events:
   -
     type: "status"
@@ -31,8 +37,21 @@ events:
     from: "TODO"
     to: "DOING"
     note: "Start: Updating annualization factor to trading days per year."
+  -
+    type: "verify"
+    at: "2026-03-02T16:03:26.773Z"
+    author: "CODER"
+    state: "ok"
+    note: "Ran python plot_funding_yield.py; output generated and formula uses trading-days constant (252)."
+  -
+    type: "status"
+    at: "2026-03-02T16:03:34.235Z"
+    author: "CODER"
+    from: "DOING"
+    to: "DONE"
+    note: "Verified: Updated annualization factor to trading days per year and confirmed output generation."
 doc_version: 2
-doc_updated_at: "2026-03-02T16:02:59.959Z"
+doc_updated_at: "2026-03-02T16:03:34.235Z"
 doc_updated_by: "CODER"
 description: "Replace the 365-day factor with trading days per year in the funding yield calculation."
 id_source: "generated"
@@ -64,6 +83,14 @@ Using a fixed trading-days factor may not match a specific exchange calendar; ve
 ### Results
 
 <!-- BEGIN VERIFICATION RESULTS -->
+#### 2026-03-02T16:03:26.773Z — VERIFY — ok
+
+By: CODER
+
+Note: Ran python plot_funding_yield.py; output generated and formula uses trading-days constant (252).
+
+VerifyStepsRef: doc_version=2, doc_updated_at=2026-03-02T16:02:59.959Z, excerpt_hash=sha256:fe1d8ef4e60cd52b999d46bdafee130714a59a3f7c082696834cc8e4353e1c1a
+
 <!-- END VERIFICATION RESULTS -->
 
 ## Rollback Plan

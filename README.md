@@ -64,3 +64,20 @@ python plot_funding_yield.py --input contractresults-GAZPF-25022025-25022026.csv
 ## Примечания
 
 Сгенерированный HTML использует Plotly из CDN, поэтому при открытии графика требуется доступ в интернет, если не указать локальный файл через `--plotly-cdn`.
+
+## Выходные файлы и примеры
+
+Выходные HTML-файлы:
+
+- `eurusd_ticks.html` — интерактивный график тиков ASK/BID.
+- `gazpf_funding_yield.html` — интерактивный график годовой доходности фандинга.
+
+Скриншоты (PNG в репозитории):
+
+График тиков ASK/BID:
+
+![EURUSD ticks](images/eurusd_ticks.png)
+
+График доходности фандинга GAZPF:
+
+![GAZPF funding yield](images/gazpf_funding_yield.png)

@@ -13,6 +13,7 @@ from typing import List, Tuple
 DEFAULT_INPUT = "contractresults-GAZPF-25022025-25022026.csv"
 DEFAULT_OUTPUT = "gazpf_funding_yield.html"
 DEFAULT_PLOTLY_CDN = "https://cdn.plot.ly/plotly-2.35.2.min.js"
+TRADING_DAYS_PER_YEAR = 252
 
 
 def parse_args() -> argparse.Namespace:
@@ -106,7 +107,7 @@ def read_yield_series(path: Path) -> Tuple[List[datetime], List[float]]:
                     continue
                 if close == 0:
                     continue
-                annualized = (swaprate / close) * 365.0 * 100.0
+                annualized = (swaprate / close) * TRADING_DAYS_PER_YEAR * 100.0
 
             dates.append(trade_date)
             yields.append(annualized)

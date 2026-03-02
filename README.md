@@ -1,27 +1,66 @@
 # test-mt5
 
-Python utility for plotting MT5 tick data (`<DATE> <TIME> <BID> <ASK> ...`) as an interactive ASK/BID chart.
+Набор Python-утилит для визуализации данных MT5:
 
-## Requirements
+- интерактивный график тик-данных ASK/BID;
+- интерактивный график годовой доходности фандинга для фьючерса GAZPF.
+
+## Требования
 
 - Python 3.9+
 
-## Usage
+Скрипты не требуют сторонних модулей. Графики строятся через Plotly, подключаемый из CDN в сгенерированном HTML.
+
+## Утилиты
+
+### 1) График тик-данных (ASK/BID)
+
+Скрипт: `plot_ticks.py`
+
+Формат входного файла: экспорт MT5 с колонками `<DATE> <TIME> <BID> <ASK> ...`
+
+Пример запуска:
 
 ```bash
 python plot_ticks.py --input EURUSD_202601020000_202601291513.csv --output eurusd_ticks.html
 ```
 
-Optional arguments:
+Необязательные параметры:
 
-- `--max-points 200000` to downsample very large files.
-- `--plotly-cdn https://cdn.plot.ly/plotly-2.35.2.min.js` to override Plotly JS source.
+- `--max-points 200000` — даунсэмплинг для очень больших файлов.
+- `--plotly-cdn https://cdn.plot.ly/plotly-2.35.2.min.js` — переопределить источник Plotly JS.
 
-After generation, open the HTML file in a browser:
+После генерации откройте HTML в браузере:
 
-- Zoom in/out with mouse wheel and toolbar.
-- Pan using the pan tool.
-- Toggle ASK/BID visibility by clicking legend items.
-- Console shows parse progress (percent + processed rows) while reading the input file.
+- масштабирование колесом мыши и тулбаром;
+- перемещение (pan) через инструмент pan;
+- скрытие/показ ASK/BID по клику на легенду;
+- в консоли отображается прогресс парсинга (проценты и количество строк).
 
-Note: generated HTML uses Plotly from CDN, so internet access is needed when opening the chart unless you point `--plotly-cdn` to a local Plotly file.
+### 2) График годовой доходности фандинга (GAZPF)
+
+Скрипт: `plot_funding_yield.py`
+
+Формат входного файла: `contractresults-*.csv` с разделителем `;` и полями:
+`TRADEDATE`, `CLOSE`, `SWAPRATE` (десятичная запятая).
+
+Формула:
+
+- годовая доходность, % = `(SWAPRATE / CLOSE) * 252 * 100`;
+- в выходные (сб/вс) доходность принудительно равна 0.
+
+Пример запуска:
+
+```bash
+python plot_funding_yield.py --input contractresults-GAZPF-25022025-25022026.csv --output gazpf_funding_yield.html
+```
+
+Необязательный параметр:
+
+- `--plotly-cdn https://cdn.plot.ly/plotly-2.35.2.min.js` — переопределить источник Plotly JS.
+
+В консоли отображается прогресс чтения CSV.
+
+## Примечания
+
+Сгенерированный HTML использует Plotly из CDN, поэтому при открытии графика требуется доступ в интернет, если не указать локальный файл через `--plotly-cdn`.
